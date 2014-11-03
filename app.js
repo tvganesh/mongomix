@@ -66,11 +66,15 @@ app.use(function(req,res,next){
   next();
 });
 
+var mycallback = function(err,results) {
+    console.log("mycallback");
+    if(err) throw err;
+};
 // Create Web server and listen on port 1337
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
  
-  if (process.env.VCAP_SERVICES) {
+ /* if (process.env.VCAP_SERVICES) {
 	  var env = JSON.parse(process.env.VCAP_SERVICES);
 	  if (env['mongodb-2.2']) {
 		var mongo = env['mongodb-2.2'][0]['credentials'];
@@ -81,21 +85,30 @@ http.createServer(app).listen(app.get('port'), function(){
 		      "password" : "secret",
 		      "url" : "mongodb://user1:secret@localhost:27017/test"
 	 }
-}
+   }  */
 
-var mycallback = function(err,results) {
-    console.log("mycallback");
-    if(err) throw err;
-};
+
 // Setup connection to DB
-var MongoClient = mongodb.MongoClient;
+/*var MongoClient = mongodb.MongoClient;
 var db= MongoClient.connect(mongo.url, function(err, db) {
   if(err) {
     console.log("failed to connect to the database");
+    return;
   } else {
     console.log("connected to database");
   }
-  var collection = db.collection('phonebook');
+  collection = db.collection('phonebook', function(error, response) {
+	      if( error ) {
+	          console.log(error + "  Could not connect to database-0")
+	          console.log("01");
+	          return;
+	          
+	       }
+	       else {
+	          console.log("Connected to phonebook-0");
+	          console.log("02");
+	       }
+	});
   
   //Clear DB and insert 3 records
   collection.remove(mycallback);
@@ -108,5 +121,5 @@ var db= MongoClient.connect(mongo.url, function(err, db) {
   collection.find().toArray(function(err, items) {
   	
   }); 
- }); 
+ }); */
 });

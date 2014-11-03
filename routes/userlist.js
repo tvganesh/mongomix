@@ -48,7 +48,7 @@ exports.list =  function(req, res) {
 	              	       }
 	              	       else {
 	              	          console.log("Connected to phonebook");
-	              	          console.log("3");
+	              	          //console.log("Total number of documents = " + db.collection.count());
 	              	       }
 	                	});
 	                	callback(null, 'one');
@@ -56,11 +56,19 @@ exports.list =  function(req, res) {
 	                },
 	                function(callback)
 	                {
-	                	console.log("222");
-	                	collection.find().toArray(function(err, items) {
+	                   	console.log("222");
+	                	
+	                	var randnum = Math.floor((Math.random() * 10) + 1);
+	                	var alpha = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','X','Y','Z'];
+	                	var randletter = alpha[Math.floor(Math.random() * alpha.length)];
+                        console.log(randletter);
+                        var val =  randletter + ".*" + randnum + ".*";	
+                        console.log(val);
+                        //var val = "T.*";
+                        var results = collection.find({"FirstName": new RegExp(val)}).limit(5).toArray(function(err, items){
 	         	           if(err) {
 	         			       console.log(err + " Error getting items for display");
-	         			       return;
+	         			      
 	         	           }
 	         	           else {
 	         			      console.log(items);
@@ -76,6 +84,6 @@ exports.list =  function(req, res) {
 	                }
 	               
 	             ]);
-	}); 
-}; 
-
+	  
+	}); // end MongoClient.connect
+}

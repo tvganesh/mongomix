@@ -62,7 +62,7 @@ exports.list = function(req, res) {
 	                {
 	                	console.log("222");
 	                	// Insert the record into the DB
-	                    collection.insert({
+	                	collection.insert({
 	                        "FirstName" : FirstName,
 	                        "LastName" : LastName,
 	                        "Mobile" : Mobile
@@ -72,10 +72,13 @@ exports.list = function(req, res) {
 	                            res.send("There was a problem adding the information to the database.");
 	                        }
 	                        else {
+	                        	console.log("Done")
 	                            // If it worked, redirect to userlist - Display users
 	                            res.location("userlist");
 	                            // And forward to success page
 	                            res.redirect("userlist");
+	                            db.close();
+	                            
 	                        }
 	                    });	                	
 	                	
