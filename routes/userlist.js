@@ -65,13 +65,14 @@ exports.list =  function(req, res) {
                         var val =  randletter + ".*" + randnum + ".*";	
                         console.log(val);
                         //var val = "T.*";
+                       
                         var results = collection.find({"FirstName": new RegExp(val)}).limit(5).toArray(function(err, items){
 	         	           if(err) {
 	         			       console.log(err + " Error getting items for display");
 	         			      
 	         	           }
 	         	           else {
-	         			      console.log(items);
+	         			      //console.log(items);
 	         			      res.render('userlist', 
 	         					   { "userlist" : items
 	         			        

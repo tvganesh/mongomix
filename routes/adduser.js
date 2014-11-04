@@ -77,13 +77,18 @@ exports.list = function(req, res) {
 	                            res.location("userlist");
 	                            // And forward to success page
 	                            res.redirect("userlist");
-	                            db.close();
+	                           
 	                            
 	                        }
 	                    });	                	
 	                	
-	                	
-	                	callback(null, 'two');
+	                	collection.find().toArray(function(err, items) {
+	            	    	console.log("**************************>>>>>>>Length =" + items.length);
+	            	    	db.close();
+	            	        
+	            	    });
+	                	 
+	                	 callback(null, 'two');
 	                }
 	               
 	             ]);
