@@ -89,7 +89,7 @@ exports.list = function(req, res) {
 	                	});
 	                	collection.find().toArray(function(err, items) {
     	    	            console.log("Length =----------------" + items.length);
-    	    	            //db.close();
+    	    	            db.close();
                             });
 	                	
 	                	callback(null, 'two');
